@@ -1,30 +1,32 @@
-import React from 'react'
-import "../../styles/style.css"
-import Sidebar from '../../components/Sidebar'
-import Menu from '../../components/Menu'
-import MainBoard from '../../components/MainBoard'
-import Search from '../../components/Search'
-import Info from '../../components/Info'
-export default function CyberbugsLayout() {
-  return (
-    
-   <div>
-  
-  {/* BODY */}
-  <div className="jira">
-    {/* Sider Bar  */}
-   <Sidebar/>
-    {/* Menu */}
-   <Menu/>
-    {/* {/* {/* Main Board * /} * /} */}
-   <MainBoard/>
-  </div>
-  {/* Search Modal */}
-  <Search/>
-  {/* Info Modal */}
- <Info/>
-</div>
+import React, { useEffect } from "react";
+import "../../styles/style.css";
 
-    
-  )
+import MainBoard from "../../components/MainBoard";
+import HeaderMain from "../../components/HeaderMain";
+import InfoMain from "../../components/InfoMain";
+import ContentMain from "../../components/ContentMain";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+export default function CyberbugsLayout() {
+  const dispatch = useDispatch();
+  const params = useParams();
+  const projectDetail = useSelector(state => state.projectReducer.projectDetail)
+  useEffect(()=>{
+    const projectId = params.projectId;
+    dispatch({
+      type: "GET_PROJECT_DETAIL",
+      projectId: projectId
+    })
+  },[])
+
+  return (
+    <div className="main">
+      <HeaderMain projectDetail={projectDetail} />
+
+      <InfoMain projectDetail={projectDetail} />
+
+      <ContentMain projectDetail={projectDetail} />
+    </div>
+  );
 }

@@ -4,6 +4,7 @@ import Router from './routes/Router';
 import { useEffect } from 'react';
 import { BrowserRouter, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import ModalCyberbugs from './HOC/CyberbugsHOC/ModalCyberbugs';
 
 function App(){
  const navigate = useNavigate()
@@ -13,6 +14,7 @@ function App(){
  },[])
   return (
    < >
+   <ModalCyberbugs/>
    <Router  />
    </>
   );

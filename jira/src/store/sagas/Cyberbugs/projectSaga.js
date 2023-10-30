@@ -11,7 +11,8 @@ const {data, status} = yield call(()=>userService.createProjectAuthorization(act
     notification.success({
         message: "create success"
     })
-
+    const navigate = yield select(state=>state.navigateReducer.navigate)
+    navigate("/projectManagement")
 
 
 } catch (error) {
@@ -22,6 +23,9 @@ const {data, status} = yield call(()=>userService.createProjectAuthorization(act
 
 }
 
+}
+export function * theoDoiCreateProjectSaga (){
+    yield takeLatest("CREATE_PROJECT_SAGA", createProjectSaga)
 }
 
 function * getListProjectSaga(action){
@@ -43,5 +47,85 @@ function * getListProjectSaga(action){
     
     export function * theoDoiGetListProjectSaga(){
         yield takeLatest("GET_LIST_PROJECT_SAGA", getListProjectSaga)
-        yield takeLatest("CREATE_PROJECT_SAGA", createProjectSaga)
+       
     }
+//update
+
+function  * updateProjectSaga (action){
+    try {
+        //call api
+    const {data, status} = yield call(()=>userService.updateProject(action.projectUpdate))
+        
+    notification.success({
+            message: "update success"
+        })
+        yield put ({
+            type: "GET_LIST_PROJECT_SAGA"
+        })
+        yield put ({
+            type : "CLOSE_MODAL"
+        })
+    
+    
+    
+    } catch (error) {
+        console.log(error.response.data);
+        notification.warning({
+            message: `update fail!!!  ${error.response.data.content}`
+        })
+    
+    }
+    
+    }
+    export function * theoDoiUpdateProjectSaga (){
+        yield takeLatest("UPDATE_PROJECT_SAGA", updateProjectSaga)
+    }
+
+ //delete
+ function  * deleteProjectSaga (action){
+    try {
+        //call api
+    const {data, status} = yield call(()=>userService.deleteProject(action.idProject))
+        
+    notification.success({
+            message: "Delete success"
+        })
+        yield put ({
+            type: "GET_LIST_PROJECT_SAGA"
+        })
+       
+    
+    
+    
+    } catch (error) {
+        console.log(error.response.data);
+        notification.warning({
+            message: `update fail!!!  ${error.response.data.content}`
+        })
+    
+    }
+    
+    }
+    export function * theoDoiDeleteProjectSaga (){
+        yield takeLatest("DELETE_PROJECT_SAGA", deleteProjectSaga)
+    }   
+ //get project detail
+ function  * getProjectDetailSaga (action){
+    try {
+        //call api
+    const {data, status} = yield call(()=>userService.getProjectDetail(action.projectId))
+        yield put({
+            type: "PUT_PROJECT_DETAIL",
+            projectDetail: data.content,
+        })
+   
+    } catch (error) {
+        console.log(error.response.data);
+      
+    
+    }
+    
+    }
+    export function * theoDoiGetProjectDetail (){
+        yield takeLatest("GET_PROJECT_DETAIL", getProjectDetailSaga)
+    }   

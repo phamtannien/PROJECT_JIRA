@@ -7,6 +7,8 @@ import { navigateReducer } from "./reducers/navigateReducer";
 import { userReducer } from "./reducers/userReducer";
 import { projectCategoryReducer } from "./reducers/projectCategoryReducer";
 import { projectCyberbugsReducer } from "./reducers/projectCyberbugsReducer";
+import { modalReducer } from "./reducers/modalCyberbugsReducer";
+import { projectReducer } from "./reducers/projectReducer";
 
 
 
@@ -22,7 +24,9 @@ const rootReducer = combineReducers({
     navigateReducer: navigateReducer,
     userReducer: userReducer ,
      projectCategoryReducer  ,
-      projectCyberbugsReducer 
+      projectCyberbugsReducer ,
+      modalReducer,
+       projectReducer: projectReducer,
 })
 
 const store = createStore(
