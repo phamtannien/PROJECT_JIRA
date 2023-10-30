@@ -5,8 +5,15 @@ import * as ProjectSaga from "./Cyberbugs/projectSaga"
 export function * rootSaga(){
     yield all ([
         Cyberbugs.theoDoiSignin(),
+        Cyberbugs.theoDoiGetUser(),
+        Cyberbugs.theoDoiAddUserProject(),
+        Cyberbugs.theoDoiRemoveUserProject(),
         ProjectCategorySaga.theoDoiGetAllProjectCategory(),
-        // ProjectSaga.theoDoiCreateProjectSaga(),
-        ProjectSaga.theoDoiGetListProjectSaga()
+        ProjectSaga.theoDoiCreateProjectSaga(),
+        ProjectSaga.theoDoiGetListProjectSaga(),
+        ProjectSaga.theoDoiUpdateProjectSaga(),
+        ProjectSaga.theoDoiDeleteProjectSaga(),
+        ProjectSaga.theoDoiGetProjectDetail(),
+
     ])
 }

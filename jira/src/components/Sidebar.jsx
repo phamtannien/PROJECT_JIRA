@@ -1,28 +1,54 @@
-import React from 'react'
-import "../styles/style.css"
+import React, { useState } from 'react';
 
+
+import {
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  UploadOutlined,
+  UserOutlined,
+  VideoCameraOutlined,
+  BarsOutlined,
+  PlusOutlined,
+  SearchOutlined
+  
+} from '@ant-design/icons';
+import { Layout, Menu, Button, theme } from 'antd';
+const { Sider,  } = Layout;
 
 
 export default function Sidebar() {
-  return  <div className="sideBar">
-  <div className="sideBar-top">
-    <div className="sideBar-icon">
-      <i className="fab fa-jira" />
-    </div>
-    <div className="sideBar-icon" data-toggle="modal" data-target="#searchModal" style={{cursor: 'pointer'}}>
-      <i className="fa fa-search" />
-      <span className="title">SEARCH ISSUES</span>
-    </div>
-    <div className="sideBar-icon">
-      <i className="fa fa-plus" />
-      <span className="title">CREATE ISSUES</span>
-    </div>
+  const [collapsed, setCollapsed] = useState(false);
+  const {
+    token: { colorBgContainer },
+  } = theme.useToken();
+  return (
+    <div  className='sidebar' >
+    <Sider   trigger={null} collapsible collapsed={collapsed} style={{height:100}} >
+    <div className="text-right"  onClick={() => setCollapsed(!collapsed)}> <BarsOutlined /></div>
+    <Menu
+    
+      style={{height:'100%'}}
+      theme="dark"
+      mode="inline"
+      defaultSelectedKeys={['1']}
+      items={[
+        
+        {
+          key: '1',
+          icon: <PlusOutlined style={{fontSize: "25px"}} />,
+          label: 'Create issue',
+        },
+        {
+          key: '2',
+          icon: <SearchOutlined style={{fontSize: "25px"}} />,
+          label: 'Search',
+        },
+      
+      ]}
+    />
+    
+     </Sider>
   </div>
-  <div className="sideBar-bottom">
-    <div className="sideBar-icon">
-      <i className="fa fa-question-circle" />
-      <span className="title">ABOUT</span>
-    </div>
-  </div>
-</div>
+  ) 
+ 
 }

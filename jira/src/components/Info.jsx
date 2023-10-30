@@ -71,7 +71,7 @@ export default function Info() {
                 <h6>Comment</h6>
                 <div className="block-comment" style={{display: 'flex'}}>
                   <div className="avatar">
-                    <img src="./assets/img/download (1).jfif" alt />
+                    <img src="./assets/img/download (1).jfif"  />
                   </div>
                   <div className="input-comment">
                     <input type="text" placeholder="Add a comment ..." />
@@ -87,7 +87,7 @@ export default function Info() {
                   <div className="comment-item">
                     <div className="display-comment" style={{display: 'flex'}}>
                       <div className="avatar">
-                        <img src="./assets/img/download (1).jfif" alt />
+                        <img src="./assets/img/download (1).jfif"  />
                       </div>
                       <div>
                         <p style={{marginBottom: 5}}>
@@ -125,7 +125,7 @@ export default function Info() {
                 <div style={{display: 'flex'}}>
                   <div style={{display: 'flex'}} className="item">
                     <div className="avatar">
-                      <img src="./assets/img/download (1).jfif" alt />
+                      <img src="./assets/img/download (1).jfif"  />
                     </div>
                     <p className="name">
                       Pickle Rick
@@ -141,7 +141,7 @@ export default function Info() {
                 <h6>REPORTER</h6>
                 <div style={{display: 'flex'}} className="item">
                   <div className="avatar">
-                    <img src="./assets/img/download (1).jfif" alt />
+                    <img src="./assets/img/download (1).jfif"  />
                   </div>
                   <p className="name">
                     Pickle Rick

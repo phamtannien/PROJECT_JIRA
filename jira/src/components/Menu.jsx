@@ -5,7 +5,7 @@ export default function Menu() {
   return  <div className="menu">
   <div className="account">
     <div className="avatar">
-      <img src="./assets/img/download.jfif" alt />
+      <img src="./assets/img/download.jfif"  />
     </div>
     <div className="account-info">
       <p>CyberLearn.vn</p>
@@ -15,11 +15,11 @@ export default function Menu() {
   <div className="control">
     <div>
       <i className="fa fa-credit-card" />
-      <NavLink className='text-dark ' activeStyle={{color: "blue"}}  to="/cyberbugs" activeClassName="active font-weight-bold text-primary" >Cyber Board</NavLink>
+      <NavLink className='text-dark ' activeStyle={{color: "blue"}}  to="/cyberbugs" activeClassName="active" >Cyber Board</NavLink>
     </div>
     <div>
       <i className="fa fa-credit-card" />
-      <NavLink  className='text-dark ' activeStyle={{color: "blue"}}  to="/projectManagement" activeClassName="active font-weight-bold text-primary">Project Management</NavLink>
+      <NavLink  className='text-dark' activeStyle={{ color:'red' }}  to="/projectManagement" activeClassName="active font-weight-bold text-primary">Project Management</NavLink>
     </div>
     <div>
       <i className="fa fa-cog mr-1" />
