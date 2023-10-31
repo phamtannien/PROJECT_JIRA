@@ -5,6 +5,7 @@ import UserLogin from '../layouts/HomeLayout/UserLogin'
 import CyberbugsLayout from '../layouts/HomeLayout/CyberbugsLayout'
 import CreateProject from '../pages/CreateProject/CreateProject'
 import ProjectManagement from '../pages/ProjectManagement/ProjectManagement'
+import FormCreateTask from '../components/Form/FormCreateTask'
 
 
 export default function Router() {
@@ -41,6 +42,11 @@ const routing = useRoutes([
         {
             path: "/projectDetail/:projectId",
             element: <CyberbugsLayout/>,
+            
+        },
+        {
+            path: "/createtask/:id",
+            element: <FormCreateTask/>,
             
         },
         

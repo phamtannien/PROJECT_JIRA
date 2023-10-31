@@ -129,3 +129,20 @@ function  * updateProjectSaga (action){
     export function * theoDoiGetProjectDetail (){
         yield takeLatest("GET_PROJECT_DETAIL", getProjectDetailSaga)
     }   
+//getAllProject
+function * getProjectAllSaga(action){
+    try {
+        const {data, status} = yield call(()=> userService.getAllProject())
+        yield put ({
+            type: "GET_ALL_PROJECT",
+            arrProject: data.content
+        })
+    } catch (error) {
+        console.log(error.response.data);
+    }
+    }
+    
+   export function * theoDoiGetAllProjectSaga(){
+        yield takeLatest("GET_ALL_PROJECT_SAGA", getProjectAllSaga)
+       
+    }
