@@ -2,53 +2,63 @@ import React, { useState } from 'react';
 
 
 import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
+ 
   BarsOutlined,
   PlusOutlined,
   SearchOutlined
   
 } from '@ant-design/icons';
 import { Layout, Menu, Button, theme } from 'antd';
+import { useDispatch } from 'react-redux';
+import FormCreateTask from './Form/FormCreateTask';
 const { Sider,  } = Layout;
 
 
 export default function Sidebar() {
-  const [collapsed, setCollapsed] = useState(false);
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
+  const dispatch = useDispatch()
+  const [state, setState] = useState({
+    collapsed: false,
+  })
+  const toggle = ()=>{
+    setState({
+      collapsed: !state.collapsed,
+    })
+  }
   return (
-    <div  className='sidebar' >
-    <Sider   trigger={null} collapsible collapsed={collapsed} style={{height:100}} >
-    <div className="text-right"  onClick={() => setCollapsed(!collapsed)}> <BarsOutlined /></div>
-    <Menu
+    <div>
+      <Sider trigger={null} collapsible collapsed={state.collapsed} style={{height:"100%"}}>
+      <div className='text-right pr-2' onClick={toggle}> <BarsOutlined style={{cursor: "pointer",  fontSize: 25}}/></div>
+      <Menu theme='dark' mode='inline' defaultSelectedKeys={['1']}>
+        <Menu.Item key="1" icon={<PlusOutlined style={{fontSize: 20}}/>}onClick={()=>{
+          dispatch({
+            type:"OPEN_FORM_CREATE_TASK",
+            Component: <FormCreateTask/>,
+            title: "Create Task"
+          })
+        }}>
+          <span className='mb-2'> Create task</span>
+        </Menu.Item>
+        <Menu.Item key="2" icon={<SearchOutlined style={{fontSize: 20}}/>}>
+
+          Search
+        </Menu.Item>
+
+
+
+
+
     
-      style={{height:'100%'}}
-      theme="dark"
-      mode="inline"
-      defaultSelectedKeys={['1']}
-      items={[
-        
-        {
-          key: '1',
-          icon: <PlusOutlined style={{fontSize: "25px"}} />,
-          label: 'Create issue',
-        },
-        {
-          key: '2',
-          icon: <SearchOutlined style={{fontSize: "25px"}} />,
-          label: 'Search',
-        },
-      
-      ]}
-    />
     
+    
+    
+    
+      </Menu>
      </Sider>
-  </div>
+    
+    </div>
+
+  
+ 
   ) 
  
 }

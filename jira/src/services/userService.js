@@ -91,6 +91,13 @@ class UserService {
            })
           
     }
+    getAllProject(){
+        return request ({
+            url: "/Project/getAllProject",
+            method: "GET",
+            
+           })
+    }
 }
 
 export const userService = new UserService()

@@ -9,6 +9,8 @@ import { projectCategoryReducer } from "./reducers/projectCategoryReducer";
 import { projectCyberbugsReducer } from "./reducers/projectCyberbugsReducer";
 import { modalReducer } from "./reducers/modalCyberbugsReducer";
 import { projectReducer } from "./reducers/projectReducer";
+import { taskTypeReducer } from "./reducers/taskTypeReducer";
+import { priorityReducer } from "./reducers/priorityReducer";
 
 
 
@@ -27,6 +29,8 @@ const rootReducer = combineReducers({
       projectCyberbugsReducer ,
       modalReducer,
        projectReducer: projectReducer,
+        taskTypeReducer,
+        priorityReducer,
 })
 
 const store = createStore(

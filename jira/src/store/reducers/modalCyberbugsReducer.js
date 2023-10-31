@@ -21,7 +21,12 @@ export const modalReducer = (state = initialState, action) => {
     case "SET_SUBMIT_EDIT_PROJECT":{
         return{...state, callBackSubmit: action.submitFunction}
     }
-    
+    case "OPEN_FORM_CREATE_TASK": {
+      return {...state, open: true,
+      ComponentContentModal: action.Component,
+    title:   action.title};
+      
+  }
   default:
     return state
   }
