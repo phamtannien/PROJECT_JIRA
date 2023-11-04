@@ -38,6 +38,13 @@ class UserService {
             headers: {'Authorization': "Bearer " + localStorage.getItem(TOKEN)}
            })
     }
+    getUserByProjectId(idProject){
+        return request ({
+            url: `/Users/getUserByProjectId?idProject=${idProject}`,
+            method: "GET",
+            headers: {'Authorization': "Bearer " + localStorage.getItem(TOKEN)}
+           })
+    }
     updateProject(projectUpdate){
         return request ({
             url: `/Project/updateProject?projectId=${projectUpdate.id}`,

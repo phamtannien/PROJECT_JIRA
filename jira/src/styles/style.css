@@ -461,3 +461,11 @@
   .logged, .estimate-time{
     font-size: 14px;
   }
+
+  ul.ant-menu.ant-menu-root {
+    height: 100vh;
+  }
+
+  .active {
+    color: red!important;
+  }

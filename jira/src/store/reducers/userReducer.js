@@ -10,7 +10,9 @@ if(localStorage.getItem(USER_LOGIN)){
 
 const stateDefault = {
     userLogin : usLogin,
-    userSearch: []
+    userSearch: [],
+    arrUser: []
+    
 }
 
 export const userReducer = (state = stateDefault, action) =>{
@@ -21,8 +23,12 @@ export const userReducer = (state = stateDefault, action) =>{
         }
         case "GET_USER_SEARCH":{
             state.userSearch = action.lstUserSearch;
-            console.log("stateUser", state);
+            
             return {...state}
+        }
+        case "GET_USER_BY_PROJECT_ID":{
+           
+            return {...state, arrUser: action.arrUser}
         }
             default : return {...state}
     }
