@@ -1,7 +1,11 @@
 import React from 'react'
 import "../styles/style.css"
 import { NavLink } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 export default function Menu() {
+  const location = useLocation()
+
+
   return  <div className="menu">
   <div className="account">
     <div className="avatar">
@@ -15,15 +19,15 @@ export default function Menu() {
   <div className="control">
     <div>
       <i className="fa fa-credit-card" />
-      <NavLink className='text-dark ' activeStyle={{color: "blue"}}  to="/cyberbugs" activeClassName="active" >Cyber Board</NavLink>
+      <NavLink  className={location.pathname === "/cyberbugs" ? 'active' : 'text-dark'}  to="/cyberbugs" activeClassName="active" >Cyber Board</NavLink>
     </div>
     <div>
       <i className="fa fa-credit-card" />
-      <NavLink  className='text-dark' activeStyle={{ color:'red' }}  to="/projectManagement" activeClassName="active font-weight-bold text-primary">Project Management</NavLink>
+      <NavLink  className={location.pathname === "/projectManagement" ? 'active' : 'text-dark'}   activeStyle="blue"  to="/projectManagement" activeClassName="active font-weight-bold text-primary">Project Management</NavLink>
     </div>
     <div>
       <i className="fa fa-cog mr-1" />
-      <NavLink  className='text-dark ' activeStyle={{color: "blue"}}  to="/createProject" activeClassName="active font-weight-bold text-primary">Create Project</NavLink>
+      <NavLink  className={location.pathname === "/createProject" ? 'active' : 'text-dark'}  to="/createProject" activeClassName="active font-weight-bold text-primary">Create Project</NavLink>
     </div>
   </div>
   <div className="feature">

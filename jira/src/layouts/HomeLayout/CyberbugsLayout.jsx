@@ -11,8 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 export default function CyberbugsLayout() {
   const dispatch = useDispatch();
   const params = useParams();
-  console.log("params", params);
   const projectDetail = useSelector(state => state.projectReducer.projectDetail)
+
   useEffect(()=>{
     const projectId = params.projectId;
     dispatch({

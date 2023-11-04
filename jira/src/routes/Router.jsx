@@ -10,10 +10,7 @@ import FormCreateTask from '../components/Form/FormCreateTask'
 
 export default function Router() {
 const routing = useRoutes([
-{
-    path: "/login",
-    element: <UserLogin/>
-},
+
     {
     path: '/',
     element: <HomeLayout />,
@@ -30,7 +27,7 @@ const routing = useRoutes([
         },
        
         {
-            path: "/",
+            path: "/cyberbugs",
             element: <CyberbugsLayout/>,
             
         },
@@ -52,6 +49,10 @@ const routing = useRoutes([
         
         
     ]
+},
+{
+    path: "/login",
+    element: <UserLogin/>
 },
 
 

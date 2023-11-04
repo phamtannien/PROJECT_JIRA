@@ -3,7 +3,7 @@ import {call, delay, fork, take, takeEvery, takeLatest, put, select} from "redux
 import { USER_LOGIN_TYPE, USER_SIGNIN_API } from "../../types/userSignin";
 import { userService } from "../../../services/userService";
 import { notification } from "antd";
-import { TOKEN, USER_LOGIN } from "../../../constants/api";
+import { STATUS_CODE, TOKEN, USER_LOGIN } from "../../../constants/api";
 
 //quản lý các action saga
 
@@ -44,7 +44,6 @@ function* getUserSaga (action){
 //call api
 try {
     const {data, status} = yield call(()=>userService.getUser(action.keyWord))
-    console.log("data", data);
     yield put({
         type: "GET_USER_SEARCH",
         lstUserSearch: data.content
@@ -99,4 +98,31 @@ function* removeUserProjectSaga (action){
     }
     export function* theoDoiRemoveUserProject(){
         yield takeLatest("REMOVE_USER_PROJECT_API", removeUserProjectSaga)
+    }
+
+//get user by project
+function* getUserByProjectSaga (action){
+const {idProject} = action;
+console.log("action", idProject);
+try {
+    const {data, status} = yield call(()=>userService.getUserByProjectId(idProject));
+   console.log("data", data);
+    if(status === STATUS_CODE.SUCCESS){
+        yield put({
+            type: "GET_USER_BY_PROJECT_ID",
+            arrUser: data.content
+        })
+    }
+} catch (error) {
+    console.log(error);
+    if(error.response?.data.statusCode === STATUS_CODE.NOT_FOUND){
+        yield put({
+            type: "GET_USER_BY_PROJECT_ID",
+            arrUser: []
+        })
+    }
+}
+}
+    export function* theoDoiGetUserByProjectIdSaga(){
+        yield takeLatest("GET_USER_BY_PROJECT_ID_SAGA", getUserByProjectSaga)
     }
