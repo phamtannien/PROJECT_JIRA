@@ -5,6 +5,8 @@ import {
   PlusOutlined,
 } from "@ant-design/icons";
 import React, { Fragment, useEffect, useRef, useState } from "react";
+import Highlighter from 'react-highlight-words';
+
 import {
   Button,
   Input,
@@ -17,6 +19,7 @@ import {
   Avatar,
   Popover,
 } from "antd";
+
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import FormEditProject from "../../components/Form/FormEditProject";
@@ -27,6 +30,91 @@ import { ADD_USER_PROJECT_API, GET_USER_API, REMOVE_USER_PROJECT_API } from "../
 import { OPEN_FORM_EDIT_PROJECT } from "../../constants/modalConstant";
 
 export default function ProjectManagement() {
+ 
+  const [searchText, setSearchText] = useState('');
+  const [searchedColumn, setSearchedColumn] = useState('');
+  const searchInput = useRef(null);
+  const handleSearch = (selectedKeys, confirm, dataIndex) => {
+    confirm();
+    setSearchText(selectedKeys[0]);
+    setSearchedColumn(dataIndex);
+  };
+
+  const getColumnSearchProps = (dataIndex) => ({
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
+      <div
+        style={{
+          padding: 8,
+        }}
+        onKeyDown={(e) => e.stopPropagation()}
+      >
+        <Input
+          ref={searchInput}
+          placeholder={`Search ${dataIndex}`}
+          value={selectedKeys[0]}
+          onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+          style={{
+            marginBottom: 8,
+            display: 'block',
+          }}
+        />
+        <Space>
+          <Button
+            type="primary"
+            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{
+              width: 90,
+            }}
+          >
+            Search
+          </Button>
+
+          <Button
+            type="link"
+            size="small"
+            onClick={() => {
+              close();
+            }}
+          >
+            close
+          </Button>
+        </Space>
+      </div>
+    ),
+    filterIcon: (filtered) => (
+      <SearchOutlined
+        style={{
+          color: filtered ? '#1677ff' : undefined,
+        }}
+      />
+    ),
+    onFilter: (value, record) =>
+      record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
+    onFilterDropdownOpenChange: (visible) => {
+      if (visible) {
+        setTimeout(() => searchInput.current?.select(), 100);
+      }
+    },
+    render: (text) =>
+      searchedColumn === dataIndex ? (
+        <Highlighter
+          highlightStyle={{
+            backgroundColor: '#ffc069',
+            padding: 0,
+          }}
+          searchWords={[searchText]}
+          autoEscape
+          textToHighlight={text ? text.toString() : ''}
+        />
+      ) : (
+        text
+      ),
+  });
+ 
+ 
   const projectList = useSelector(
     (state) => state.projectCyberbugsReducer.projectList
   );
@@ -73,6 +161,7 @@ export default function ProjectManagement() {
       title: "projectName",
       dataIndex: "projectName",
       key: "projectName",
+      ...getColumnSearchProps('projectName'),
       render: (text, record, index)=>{
         return <NavLink to={`/projectDetail/${record.id}`}>{text}</NavLink>
       },

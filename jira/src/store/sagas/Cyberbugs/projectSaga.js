@@ -4,17 +4,27 @@ import { notification } from "antd";
 import { projectService } from "../../../services/projectService";
 import { CREATE_PROJECT_SAGA, DELETE_PROJECT_SAGA, GET_ALL_PROJECT, GET_ALL_PROJECT_SAGA, GET_LIST_PROJECT, GET_LIST_PROJECT_SAGA, GET_PROJECT_DETAIL, PUT_PROJECT_DETAIL, UPDATE_PROJECT_SAGA } from "../../../constants/projectConstant";
 import { CLOSE_MODAL } from "../../../constants/modalConstant";
+import { STATUS_CODE } from "../../../constants/api";
+import { DISPLAY_LOADING, HIDE_LOADING } from "../../../constants/loadingConstant";
 
 
 function  * createProjectSaga (action){
+    yield put({
+        type: DISPLAY_LOADING
+    })
+    yield delay(500)
 try {
     //call api
 const {data, status} = yield call(()=>projectService.createProjectAuthorization(action.newProject))
+  
+if(STATUS_CODE.SUCCESS){
     notification.success({
         message: "create success"
     })
     const navigate = yield select(state=>state.navigateReducer.navigate)
     navigate("/projectManagement")
+}
+
 
 
 } catch (error) {
@@ -24,6 +34,9 @@ const {data, status} = yield call(()=>projectService.createProjectAuthorization(
     })
 
 }
+yield put ({
+    type: HIDE_LOADING
+})
 
 }
 export function * theoDoiCreateProjectSaga (){
@@ -31,15 +44,25 @@ export function * theoDoiCreateProjectSaga (){
 }
 
 function * getListProjectSaga(action){
+    yield put({
+        type: DISPLAY_LOADING
+    })
     try {
         const {data, status} = yield call(()=> projectService.getListProject())
-        yield put ({
-            type: GET_LIST_PROJECT,
-            projectList: data.content
-        })
-    } catch (error) {
         
+        if(status === STATUS_CODE.SUCCESS){
+            yield put ({
+                type: GET_LIST_PROJECT,
+                projectList: data.content
+            })
+        }
+        
+    } catch (error) {
+        console.log(error);
     }
+    yield put ({
+        type: HIDE_LOADING
+    })
     }
     
     
@@ -139,6 +162,7 @@ function * getProjectAllSaga(action){
             type: GET_ALL_PROJECT,
             arrProject: data.content
         })
+     
     } catch (error) {
         console.log(error.response.data);
     }

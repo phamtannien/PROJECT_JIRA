@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { BrowserRouter, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import ModalCyberbugs from './HOC/CyberbugsHOC/ModalCyberbugs';
+import LoadingComponent from './components/LoadingContext/LoadingComponent';
 
 function App(){
  const navigate = useNavigate()
@@ -14,6 +15,7 @@ function App(){
  },[])
   return (
    < >
+   <LoadingComponent/>
    <ModalCyberbugs/>
    <Router  />
    </>
