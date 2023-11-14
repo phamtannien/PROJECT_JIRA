@@ -22,6 +22,9 @@ import { useDispatch, useSelector } from "react-redux";
 import FormEditProject from "../../components/Form/FormEditProject";
 import Sidebar from "../../components/Sidebar";
 import Menu from "../../components/Menu";
+import { DELETE_PROJECT_SAGA, EDIT_PROJECT, GET_LIST_PROJECT_SAGA } from "../../constants/projectConstant";
+import { ADD_USER_PROJECT_API, GET_USER_API, REMOVE_USER_PROJECT_API } from "../../constants/userConstants";
+import { OPEN_FORM_EDIT_PROJECT } from "../../constants/modalConstant";
 
 export default function ProjectManagement() {
   const projectList = useSelector(
@@ -35,7 +38,9 @@ export default function ProjectManagement() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch({ type: "GET_LIST_PROJECT_SAGA" });
+    dispatch({ 
+      type: GET_LIST_PROJECT_SAGA 
+    });
   }, []);
 
   const [state, setState] = useState({
@@ -142,7 +147,7 @@ export default function ProjectManagement() {
                         <td>
                           <button style={{borderRadius: "50%"}} className="btn btn-danger" onClick={()=>{
                             dispatch({
-                              type: "REMOVE_USER_PROJECT_API",
+                              type: REMOVE_USER_PROJECT_API,
                               userProject: {
                                 userId: item.userId,
                                 projectId: record.id
@@ -179,7 +184,7 @@ export default function ProjectManagement() {
                       setValue(option.label)
                       //call api
                       dispatch({
-                        type:"ADD_USER_PROJECT_API",
+                        type:ADD_USER_PROJECT_API,
                         userProject: {
                           "projectId": record.id,
                           "userId": valueSelect
@@ -193,7 +198,7 @@ export default function ProjectManagement() {
                       }
                       searchRef.current = setTimeout(()=>{
                         dispatch({
-                          type: "GET_USER_API",
+                          type: GET_USER_API,
                           keyWord: values,
                         });
                       },300)
@@ -224,14 +229,14 @@ export default function ProjectManagement() {
               className="btn mr-2 btn-primary"
               onClick={() => {
                 const action = {
-                  type: "OPEN_FORM_EDIT_PROJECT",
+                  type: OPEN_FORM_EDIT_PROJECT,
                   title: "Edit project",
                   Component: <FormEditProject />,
                 };
                 dispatch(action);
                 //dispatch dữ liệu hiện tại lên reducer
                 const actionEditProject = {
-                  type: "EDIT_PROJECT",
+                  type: EDIT_PROJECT,
                   projectEditModel: record,
                 };
                 dispatch(actionEditProject);
@@ -244,7 +249,7 @@ export default function ProjectManagement() {
               title="Are you sure to delete this project?"
               onConfirm={() => {
                 dispatch({
-                  type: "DELETE_PROJECT_SAGA",
+                  type: DELETE_PROJECT_SAGA,
                   idProject: record.id,
                 });
               }}

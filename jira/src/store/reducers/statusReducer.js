@@ -1,3 +1,5 @@
+import { GET_ALL_STATUS } from "../../constants/statusContant"
+
 const initialState = {
     arrStatus: []
 }
@@ -5,7 +7,7 @@ const initialState = {
 export const statusReducer = (state = initialState, action) => {
   switch (action.type) {
 
-  case "GET_ALL_STATUS":
+  case GET_ALL_STATUS:
     return { ...state, arrStatus: action.arrStatus }
 
   default:

@@ -1,9 +1,10 @@
 import axios from "axios";
 import {call, delay, fork, take, takeEvery, takeLatest, put, select} from "redux-saga/effects"
-import { USER_LOGIN_TYPE, USER_SIGNIN_API } from "../../types/userSignin";
+import { ADD_USER_PROJECT_API, GET_USER_API, GET_USER_BY_PROJECT_ID, GET_USER_BY_PROJECT_ID_SAGA, GET_USER_SEARCH, REMOVE_USER_PROJECT_API, USER_LOGIN_TYPE, USER_SIGNIN_API } from "../../../constants/userConstants";
 import { userService } from "../../../services/userService";
 import { notification } from "antd";
 import { STATUS_CODE, TOKEN, USER_LOGIN } from "../../../constants/api";
+import { GET_LIST_PROJECT_SAGA } from "../../../constants/projectConstant";
 
 //quản lý các action saga
 
@@ -22,7 +23,7 @@ function * signinSaga(action){
             userLogin: data.content
         })
         const navigate = yield select(state=>state.navigateReducer.navigate)
-        navigate("/cyberbugs")
+        navigate("/")
     } catch (error) {
         notification.warning({
             message: `Đăng nhập thất bại: ${error.response?.data.content}`
@@ -45,7 +46,7 @@ function* getUserSaga (action){
 try {
     const {data, status} = yield call(()=>userService.getUser(action.keyWord))
     yield put({
-        type: "GET_USER_SEARCH",
+        type: GET_USER_SEARCH,
         lstUserSearch: data.content
     })
 } catch (error) {
@@ -53,7 +54,7 @@ try {
 }
 }
 export function* theoDoiGetUser(){
-    yield takeLatest("GET_USER_API", getUserSaga)
+    yield takeLatest(GET_USER_API, getUserSaga)
 }
 
 //add user to project
@@ -64,7 +65,7 @@ function* addUserProjectSaga (action){
     try {
         const {data, status} = yield call(()=>userService.asignUserProject(action.userProject))
         yield put ({
-            type: "GET_LIST_PROJECT_SAGA"
+            type: GET_LIST_PROJECT_SAGA
         })
     } catch (error) {
         notification.warning({
@@ -74,7 +75,7 @@ function* addUserProjectSaga (action){
     }
     }
     export function* theoDoiAddUserProject(){
-        yield takeLatest("ADD_USER_PROJECT_API", addUserProjectSaga)
+        yield takeLatest(ADD_USER_PROJECT_API, addUserProjectSaga)
     }
 //remove user to project
 function* removeUserProjectSaga (action){
@@ -87,7 +88,7 @@ function* removeUserProjectSaga (action){
             message: "Xóa thành công!"
         })
         yield put ({
-            type: "GET_LIST_PROJECT_SAGA"
+            type: GET_LIST_PROJECT_SAGA
         })
     } catch (error) {
         notification.warning({
@@ -97,7 +98,7 @@ function* removeUserProjectSaga (action){
     }
     }
     export function* theoDoiRemoveUserProject(){
-        yield takeLatest("REMOVE_USER_PROJECT_API", removeUserProjectSaga)
+        yield takeLatest(REMOVE_USER_PROJECT_API, removeUserProjectSaga)
     }
 
 //get user by project
@@ -109,7 +110,7 @@ try {
    console.log("data", data);
     if(status === STATUS_CODE.SUCCESS){
         yield put({
-            type: "GET_USER_BY_PROJECT_ID",
+            type: GET_USER_BY_PROJECT_ID,
             arrUser: data.content
         })
     }
@@ -117,12 +118,12 @@ try {
     console.log(error);
     if(error.response?.data.statusCode === STATUS_CODE.NOT_FOUND){
         yield put({
-            type: "GET_USER_BY_PROJECT_ID",
+            type: GET_USER_BY_PROJECT_ID,
             arrUser: []
         })
     }
 }
 }
     export function* theoDoiGetUserByProjectIdSaga(){
-        yield takeLatest("GET_USER_BY_PROJECT_ID_SAGA", getUserByProjectSaga)
+        yield takeLatest(GET_USER_BY_PROJECT_ID_SAGA, getUserByProjectSaga)
     }

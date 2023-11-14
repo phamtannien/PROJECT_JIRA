@@ -1,5 +1,6 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { statusService } from "../../../services/statusService";
+import { GET_ALL_STATUS, GET_ALL_STATUS_SAGA } from "../../../constants/statusContant";
 
 function * getAllStatusSaga (action) {
    
@@ -7,7 +8,7 @@ function * getAllStatusSaga (action) {
         const {data, status} = yield call(()=>statusService.getAllStatus());
 
         yield put ({
-            type: "GET_ALL_STATUS",
+            type: GET_ALL_STATUS,
             arrStatus: data.content
         })
     } catch (error) {
@@ -16,5 +17,5 @@ function * getAllStatusSaga (action) {
 }
 
 export function * theoDoiGetAllStatusSaga(){
-   yield takeLatest("GET_ALL_STATUS_SAGA",getAllStatusSaga )
+   yield takeLatest(GET_ALL_STATUS_SAGA,getAllStatusSaga )
 }

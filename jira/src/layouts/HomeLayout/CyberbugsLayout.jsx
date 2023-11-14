@@ -7,6 +7,7 @@ import InfoMain from "../../components/InfoMain";
 import ContentMain from "../../components/ContentMain";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { GET_PROJECT_DETAIL } from "../../constants/projectConstant";
 
 export default function CyberbugsLayout() {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ export default function CyberbugsLayout() {
   useEffect(()=>{
     const projectId = params.projectId;
     dispatch({
-      type: "GET_PROJECT_DETAIL",
+      type: GET_PROJECT_DETAIL,
       projectId: projectId
     })
   },[])

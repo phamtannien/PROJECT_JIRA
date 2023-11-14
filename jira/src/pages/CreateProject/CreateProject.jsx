@@ -4,6 +4,7 @@ import {withFormik, Form} from "formik";
 import * as Yup from 'yup';
 import { connect, useSelector, useDispatch } from "react-redux";
 import { GET_ALL_PROJECT_CATEGORY, GET_ALL_PROJECT_CATEGORY_SAGA } from "../../store/types/userSignin";
+import { CREATE_PROJECT_SAGA } from "../../constants/projectConstant";
 
 
  function CreateProject(props) {
@@ -93,7 +94,7 @@ const createProjectForm = withFormik({
   }) ,
 
   handleSubmit: (values, {props, setSubmitting }) => {
-   props.dispatch({type:"CREATE_PROJECT_SAGA",
+   props.dispatch({type:CREATE_PROJECT_SAGA,
   newProject: values
   })
  

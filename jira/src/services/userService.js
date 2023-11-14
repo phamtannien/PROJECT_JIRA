@@ -9,35 +9,17 @@ class UserService {
             data: data,
            })
     }
-    getAllProjectCategory(){
+    signupApi(data){
         return request ({
-            url: "/ProjectCategory",
-            method: "GET",
-            
-           })
-    }
-    createProject(newProject){
-        return request ({
-            url: "/Project/createProject",
+            url: "/Users/signup",
             method: "POST",
-            data: newProject
+            data: data,
            })
     }
-    createProjectAuthorization(newProject){
-        return request ({
-            url: "/Project/createProjectAuthorize",
-            method: "POST",
-            data: newProject,
-            headers: {'Authorization': "Bearer " + localStorage.getItem(TOKEN)}
-           })
-    }
-    getListProject(){
-        return request ({
-            url: "/Project/getAllProject",
-            method: "GET",
-            headers: {'Authorization': "Bearer " + localStorage.getItem(TOKEN)}
-           })
-    }
+    
+
+
+
     getUserByProjectId(idProject){
         return request ({
             url: `/Users/getUserByProjectId?idProject=${idProject}`,
@@ -45,21 +27,18 @@ class UserService {
             headers: {'Authorization': "Bearer " + localStorage.getItem(TOKEN)}
            })
     }
-    updateProject(projectUpdate){
+   
+    deleteUserProject(userProject){
         return request ({
-            url: `/Project/updateProject?projectId=${projectUpdate.id}`,
-            method: "PUT",
-            data: projectUpdate,
+            url: `Project/removeUserFromProject`,
+            method: "POST",
+            data: userProject,
             headers: {'Authorization': "Bearer " + localStorage.getItem(TOKEN)}
+        
            })
+          
     }
-    deleteProject(id){
-        return request ({
-            url: `/Project/deleteProject?projectId=${id}`,
-            method: "DELETE",
-            headers: {'Authorization': "Bearer " + localStorage.getItem(TOKEN)}
-           })
-    }
+    
     getUser(keyWord){
         return request ({
             url: `/Users/getUser?keyword=${keyWord}`,
@@ -79,32 +58,7 @@ class UserService {
            })
           
     }
-    deleteUserProject(userProject){
-        return request ({
-            url: `Project/removeUserFromProject`,
-            method: "POST",
-            data: userProject,
-            headers: {'Authorization': "Bearer " + localStorage.getItem(TOKEN)}
-        
-           })
-          
-    }
-    getProjectDetail(projectId){
-        return request ({
-            url: `/Project/getProjectDetail?id=${projectId}`,
-            method: "GET",
-            headers: {'Authorization': "Bearer " + localStorage.getItem(TOKEN)}
-        
-           })
-          
-    }
-    getAllProject(){
-        return request ({
-            url: "/Project/getAllProject",
-            method: "GET",
-            
-           })
-    }
+
 }
 
 export const userService = new UserService()

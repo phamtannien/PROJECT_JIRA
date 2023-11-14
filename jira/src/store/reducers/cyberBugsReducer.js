@@ -1,4 +1,4 @@
-import { USER_SIGNIN_API } from "../types/userSignin"
+import { USER_SIGNIN_API } from "../../constants/userConstants"
 
 
 const initialState = {

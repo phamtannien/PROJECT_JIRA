@@ -4,11 +4,12 @@ import { Button, Input,  } from "antd";
 import {withFormik, Form} from "formik";
 import * as Yup from 'yup';
 import { connect, useDispatch } from "react-redux";
-import { USER_SIGNIN_API } from "../../store/types/userSignin";
+import { USER_SIGNIN_API } from "../../constants/userConstants";
 import { signinAction } from "../../store/actions/cyberBugsAction";
+import { useNavigate } from "react-router-dom";
 
  function Login(props) {
-    
+    const navigate = useNavigate();
     const {
         values,
         touched,
@@ -47,8 +48,12 @@ import { signinAction } from "../../store/actions/cyberBugsAction";
           />
         </div>
         <div className="text-danger">{errors.password}</div>
+        <div className="d-flex">
+        <Button htmlType="submit" style={{width:"50%", backgroundColor:"rgb(102,117,223)"}} className="mt-3 mr-3" size="large" type="primary">Login</Button>
+        <Button  style={{width:"50%", backgroundColor:"rgb(102,117,223)"}} className="mt-3" size="large" type="primary" onClick={()=>navigate("/register")}>Register</Button>
+        </div>
+       
 
-        <Button htmlType="submit" style={{width:"20%", backgroundColor:"rgb(102,117,223)"}} className="mt-3" size="large" type="primary">Login</Button>
         <div className="social d-flex mt-3">
           <Button style={{backgroundColor:"rgb(59,89,152)"}} shape="circle" size="large">
                 <span className="font-weight-bold text-white">F</span>

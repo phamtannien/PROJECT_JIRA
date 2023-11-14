@@ -1,5 +1,5 @@
 import { USER_LOGIN } from "../../constants/api";
-import { USER_LOGIN_TYPE } from "../types/userSignin";
+import { GET_USER_BY_PROJECT_ID, GET_USER_SEARCH, USER_LOGIN_TYPE } from "../../constants/userConstants";
 
 
 let usLogin = {};
@@ -21,12 +21,12 @@ export const userReducer = (state = stateDefault, action) =>{
             state.userLogin = action.userLogin;
             return {...state}
         }
-        case "GET_USER_SEARCH":{
+        case GET_USER_SEARCH:{
             state.userSearch = action.lstUserSearch;
             
             return {...state}
         }
-        case "GET_USER_BY_PROJECT_ID":{
+        case GET_USER_BY_PROJECT_ID:{
            
             return {...state, arrUser: action.arrUser}
         }
