@@ -30,7 +30,7 @@ if(STATUS_CODE.SUCCESS){
 } catch (error) {
     console.log(error.response.data);
     notification.warning({
-        message: 'create fail'
+        message: `create fail ${error.response.data.content}`
     })
 
 }

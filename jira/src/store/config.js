@@ -13,6 +13,7 @@ import { taskTypeReducer } from "./reducers/taskTypeReducer";
 import { priorityReducer } from "./reducers/priorityReducer";
 import { statusReducer } from "./reducers/statusReducer";
 import { loadingReducer } from "./reducers/loadingReducer";
+import { taskReducer } from "./reducers/taskReducer";
 
 
 
@@ -34,7 +35,8 @@ const rootReducer = combineReducers({
         taskTypeReducer,
         priorityReducer,
        statusReducer,
-        loadingReducer
+        loadingReducer,
+         taskReducer
 })
 
 const store = createStore(

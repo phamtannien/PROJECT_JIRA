@@ -13,6 +13,7 @@ export function * rootSaga(){
         Cyberbugs.theoDoiGetUserByProjectIdSaga(),
         Cyberbugs.theoDoiAddUserProject(),
         Cyberbugs.theoDoiRemoveUserProject(),
+   
         ProjectCategorySaga.theoDoiGetAllProjectCategory(),
         ProjectSaga.theoDoiCreateProjectSaga(),
         ProjectSaga.theoDoiGetListProjectSaga(),
@@ -23,6 +24,10 @@ export function * rootSaga(){
         TaskTypeSaga.theoDoiGetAllTaskTypeSaga(),
         Priority.theoDoiGetAllPrioritySaga(),
         TaskSaga.theoDoiCreateTaskSaga(),
+        TaskSaga.theoDoiGetTaskDetailSaga(),
+        TaskSaga.theoDoiUpdateTaskStatusSaga(),
+        TaskSaga.theoDoiUpdateTaskSaga(),
+        TaskSaga.theoDoiHandleChangePostApi(),
         StatusSaga.theoDoiGetAllStatusSaga(),
     ])
 }

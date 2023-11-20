@@ -111,11 +111,13 @@
     padding-top: 12%;
     padding-bottom: 5%;
     text-align: left;
+    
   }
   
   .menu .account .account-info p:first-child {
     margin-bottom: 3px;
     font-weight: 500;
+    
   }
   
   .menu .account .account-info p:last-child {

@@ -257,6 +257,7 @@ const formCreateTask = withFormik({
     }) ,
   
     handleSubmit: (values, {props, setSubmitting }) => {
+        console.log(values);
     props.dispatch({
         type:"CREATE_TASK_SAGA",
         taskObject: values

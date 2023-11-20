@@ -6,7 +6,6 @@ import CyberbugsLayout from '../layouts/HomeLayout/CyberbugsLayout'
 import CreateProject from '../pages/CreateProject/CreateProject'
 import ProjectManagement from '../pages/ProjectManagement/ProjectManagement'
 import FormCreateTask from '../components/Form/FormCreateTask'
-import Register from '../pages/Register/Register'
 import UserRegister from '../layouts/HomeLayout/UserRegister'
 
 
@@ -60,6 +59,8 @@ const routing = useRoutes([
     path: "/register",
     element: <UserRegister/>
 },
+
+
 
 
 ])

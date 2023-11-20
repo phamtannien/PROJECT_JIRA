@@ -21,6 +21,7 @@ export const userReducer = (state = stateDefault, action) =>{
             state.userLogin = action.userLogin;
             return {...state}
         }
+        
         case GET_USER_SEARCH:{
             state.userSearch = action.lstUserSearch;
             

@@ -5,17 +5,22 @@ import {
  
   BarsOutlined,
   PlusOutlined,
-  SearchOutlined
+  SearchOutlined,
+  LogoutOutlined
   
 } from '@ant-design/icons';
-import { Layout, Menu, Button, theme } from 'antd';
+import { Layout, Menu, Button, theme, notification } from 'antd';
 import { useDispatch } from 'react-redux';
 import FormCreateTask from './Form/FormCreateTask';
+import { USER_LOGIN } from '../constants/api';
+import { signinAction } from '../store/actions/cyberBugsAction';
+import { useNavigate } from 'react-router-dom';
 const { Sider,  } = Layout;
 
 
 export default function Sidebar() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [state, setState] = useState({
     collapsed: false,
   })
@@ -23,6 +28,14 @@ export default function Sidebar() {
     setState({
       collapsed: !state.collapsed,
     })
+  }
+  const handleLogout = ()=>{
+     localStorage.removeItem(USER_LOGIN);
+     dispatch(signinAction(null))
+    // notification.success({
+    //   message: "đăng xuất thành công"
+    // })
+     navigate("/login")
   }
   return (
     <div>
@@ -41,6 +54,9 @@ export default function Sidebar() {
         <Menu.Item key="2" icon={<SearchOutlined style={{fontSize: 20}}/>}>
 
           Search
+        </Menu.Item>
+        <Menu.Item  key="3" icon={<LogoutOutlined style={{fontSize: 20}}/>} onClick={handleLogout}>
+          Logout
         </Menu.Item>
 
 

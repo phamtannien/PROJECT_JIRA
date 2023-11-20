@@ -1,5 +1,4 @@
 import React from 'react'
-import Header from '../../components/Header'
 import {Outlet} from "react-router-dom"
 import Search from '../../components/Search'
 import Sidebar from '../../components/Sidebar'

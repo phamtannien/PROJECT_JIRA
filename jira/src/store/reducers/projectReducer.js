@@ -8,9 +8,7 @@ const initialState = {
       "description": "string",
       "categoryId": "string",
     },
-    projectDetail:{
-
-    }
+    projectDetail:{}
 }
 
 export const projectReducer = (state = initialState, action) => {
