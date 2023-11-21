@@ -1,22 +1,65 @@
 import React from 'react'
 import "../styles/style.css"
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
-import { userLocalStorage } from '../constants/api'
+import { USER_LOGIN, userLocalStorage } from '../constants/api'
+import { Button, Popover, ConfigProvider } from 'antd';
+import { useDispatch } from 'react-redux'
+import { signinAction } from '../store/actions/cyberBugsAction'
+
+
+
 export default function Menu() {
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const handleLogout = ()=>{
+    localStorage.removeItem(USER_LOGIN);
+    dispatch(signinAction(null))
+    navigate("/login")
+  }
+const content1 = (
+ <button className='btn btn-primary' onClick={()=>navigate("/login")}>Login</button>
+);
+const content2 = (
+ <button className='btn btn-danger' onClick={handleLogout} >Logout</button>
+);
+
+
   const location = useLocation()
   const user = userLocalStorage.get();
- console.log(user);
-  return  <div className="menu">
-  <div className="account">
-    <div className="avatar">
+
+  const rederContent = ()=>{
+    if(!user){
+      return <div className="account">
+      <div className="avatar">
+      <Popover placement="bottom"  content={content1}>
+      <img style={{width: "60px", height:"60px"}} src='https://cdn-icons-png.flaticon.com/512/3177/3177440.png'  />
+        </Popover>
+        
+      </div>
+      <div className="account-info">
+        <p className='font-weight-bold text-primary '>Chưa đăng nhập</p>
+        <p>Jira clone</p>
+      </div>
+    </div>
+    }else{
+      return <div className="account">
+      <div className="avatar">
+      <Popover placement="bottom"  content={content2}>
       <img style={{width: "60px", height:"60px"}} src={user.avatar}  />
+        </Popover>
+        
+      </div>
+      <div className="account-info">
+        <p className='font-weight-bold text-primary '>{user.name}</p>
+        <p>Jira clone</p>
+      </div>
     </div>
-    <div className="account-info">
-      <p className='font-weight-bold text-primary h4'>{user.name}</p>
-      <p>Jira clone</p>
-    </div>
-  </div>
+    }
+  }
+  return  <div className="menu">
+      
+  {rederContent()}
   <div className="control">
     <div >
       <i className="fa fa-credit-card mr-2" />

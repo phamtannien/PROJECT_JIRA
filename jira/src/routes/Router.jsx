@@ -8,6 +8,8 @@ import ProjectManagement from '../pages/ProjectManagement/ProjectManagement'
 import FormCreateTask from '../components/Form/FormCreateTask'
 import UserRegister from '../layouts/HomeLayout/UserRegister'
 import UserManagement from '../pages/UserManagement/UserManagement'
+import AuthGuard from '../Guards/AuthGuard'
+import NoAuGuard from '../Guards/NoAuGuard'
 
 
 export default function Router() {
@@ -60,6 +62,7 @@ const routing = useRoutes([
 {
     path: "/login",
     element: <UserLogin/>
+  
 },
 {
     path: "/register",

@@ -17,10 +17,16 @@ function * createTaskSaga(action){
         notification.success({
             message: "Create successfully"
         })
-        yield put ({
-            type : CLOSE_MODAL,
-           
-        })
+        if(status == STATUS_CODE.SUCCESS){
+            yield put ({
+                type : CLOSE_MODAL,
+               
+            })
+           yield put({
+            type: GET_PROJECT_DETAIL
+           })
+        }
+        
     } catch (error) {
         console.log(error);
     }
@@ -72,12 +78,7 @@ function * updateTaskStatusSaga(action){
  }
 //update task 
 
-function * updateTaskSaga(action){
-    
- }
- export function * theoDoiUpdateTaskSaga(){
-     yield takeLatest(UPDATE_TASK_SAGA,updateTaskSaga )
- }
+
  export function * handleChangePostApi (action){
 //gọi action làm thay đổi task detail modal
 

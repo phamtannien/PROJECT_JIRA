@@ -30,11 +30,7 @@ export default function Sidebar() {
       collapsed: !state.collapsed,
     })
   }
-  const handleLogout = ()=>{
-     localStorage.removeItem(USER_LOGIN);
-     dispatch(signinAction(null))
-     navigate("/login")
-  }
+ 
   return (
     <div>
       <Sider trigger={null} collapsible collapsed={state.collapsed} style={{height:"100%"}}>
@@ -53,9 +49,7 @@ export default function Sidebar() {
 
           Search
         </Menu.Item>
-        <Menu.Item  key="3" icon={<LogoutOutlined style={{fontSize: 20}}/>} onClick={handleLogout}>
-          Logout
-        </Menu.Item>
+       
       </Menu>
      </Sider>
     
