@@ -22,9 +22,16 @@ function * createTaskSaga(action){
                 type : CLOSE_MODAL,
                
             })
-           yield put({
-            type: GET_PROJECT_DETAIL
-           })
+            if(status == STATUS_CODE.SUCCESS){
+                yield put({
+                    type: GET_PROJECT_DETAIL,
+                    projectId: action.taskObject.projectId
+                })
+                yield put({
+                    type: GET_TASK_DETAIL_SAGA,
+                    taskId: action.taskObject.taskUpdateApi.taskId
+                })
+            }
         }
         
     } catch (error) {
