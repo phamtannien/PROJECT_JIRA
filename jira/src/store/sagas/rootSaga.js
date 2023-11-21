@@ -10,6 +10,7 @@ export function * rootSaga(){
     yield all ([
         Cyberbugs.theoDoiSignin(),
         Cyberbugs.theoDoiGetUser(),
+        Cyberbugs.theoDoiDeleteUser(),
         Cyberbugs.theoDoiGetUserByProjectIdSaga(),
         Cyberbugs.theoDoiAddUserProject(),
         Cyberbugs.theoDoiRemoveUserProject(),

@@ -1,5 +1,4 @@
 import React from 'react'
-import Info from './Info';
 import { useDispatch } from 'react-redux';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { UPDATE_STATUS_TASK_SAGA } from '../constants/taskConstant';

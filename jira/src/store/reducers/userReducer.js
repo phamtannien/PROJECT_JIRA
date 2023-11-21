@@ -9,6 +9,7 @@ if(localStorage.getItem(USER_LOGIN)){
 }
 
 const stateDefault = {
+ 
     userLogin : usLogin,
     userSearch: [],
     arrUser: []
@@ -31,6 +32,7 @@ export const userReducer = (state = stateDefault, action) =>{
            
             return {...state, arrUser: action.arrUser}
         }
+        
             default : return {...state}
     }
 }

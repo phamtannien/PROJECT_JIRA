@@ -15,6 +15,7 @@ import FormCreateTask from './Form/FormCreateTask';
 import { USER_LOGIN } from '../constants/api';
 import { signinAction } from '../store/actions/cyberBugsAction';
 import { useNavigate } from 'react-router-dom';
+import { OPEN_FORM_CREATE_TASK } from '../constants/modalConstant';
 const { Sider,  } = Layout;
 
 
@@ -32,9 +33,6 @@ export default function Sidebar() {
   const handleLogout = ()=>{
      localStorage.removeItem(USER_LOGIN);
      dispatch(signinAction(null))
-    // notification.success({
-    //   message: "đăng xuất thành công"
-    // })
      navigate("/login")
   }
   return (
@@ -44,7 +42,7 @@ export default function Sidebar() {
       <Menu theme='dark' mode='inline' defaultSelectedKeys={['1']}>
         <Menu.Item key="1" icon={<PlusOutlined style={{fontSize: 20}}/>}onClick={()=>{
           dispatch({
-            type:"OPEN_FORM_CREATE_TASK",
+            type:OPEN_FORM_CREATE_TASK,
             Component: <FormCreateTask/>,
             title: "Create Task"
           })
@@ -58,16 +56,6 @@ export default function Sidebar() {
         <Menu.Item  key="3" icon={<LogoutOutlined style={{fontSize: 20}}/>} onClick={handleLogout}>
           Logout
         </Menu.Item>
-
-
-
-
-
-    
-    
-    
-    
-    
       </Menu>
      </Sider>
     

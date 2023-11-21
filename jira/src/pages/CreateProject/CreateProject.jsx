@@ -89,8 +89,6 @@ const createProjectForm = withFormik({
 },
 
   validationSchema: Yup.object().shape({
-     // email: Yup.string().required("Email is not required").email("email is invalid!"),
-      //password: Yup.string().min(6, "password must have min 6 characters").max(32,"password must have max 32 characters" )
   }) ,
 
   handleSubmit: (values, {props, setSubmitting }) => {

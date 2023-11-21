@@ -125,7 +125,7 @@ function  * updateProjectSaga (action){
     } catch (error) {
         console.log(error.response.data);
         notification.warning({
-            message: `update fail!!!  ${error.response.data.content}`
+            message: `delete fail!!!  ${error.response.data.content}`
         })
     
     }

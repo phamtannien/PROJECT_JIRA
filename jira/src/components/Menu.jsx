@@ -6,7 +6,7 @@ import { userLocalStorage } from '../constants/api'
 export default function Menu() {
   const location = useLocation()
   const user = userLocalStorage.get();
-  console.log(user);
+ console.log(user);
   return  <div className="menu">
   <div className="account">
     <div className="avatar">
@@ -29,6 +29,10 @@ export default function Menu() {
     <div>
       <i className="fa fa-cog mr-2" />
       <NavLink  className={location.pathname === "/createProject" ? 'active' : 'text-dark'}  to="/createProject" activeClassName="active font-weight-bold text-primary">Create Project</NavLink>
+    </div>
+    <div>
+    <i class="fa-solid fa-user mr-2"></i>
+      <NavLink  className={location.pathname === "/usermanagement" ? 'active' : 'text-dark'}  to="/usermanagement" activeClassName="active font-weight-bold text-primary">User Management</NavLink>
     </div>
   </div>
   <div className="feature">

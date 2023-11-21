@@ -23,8 +23,6 @@ import {
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import FormEditProject from "../../components/Form/FormEditProject";
-import Sidebar from "../../components/Sidebar";
-import Menu from "../../components/Menu";
 import { DELETE_PROJECT_SAGA, EDIT_PROJECT, GET_LIST_PROJECT_SAGA } from "../../constants/projectConstant";
 import { ADD_USER_PROJECT_API, GET_USER_API, REMOVE_USER_PROJECT_API } from "../../constants/userConstants";
 import { OPEN_FORM_EDIT_PROJECT } from "../../constants/modalConstant";

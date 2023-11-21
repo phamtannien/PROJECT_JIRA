@@ -3,6 +3,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import {withFormik, Form} from "formik";
 import * as Yup from 'yup';
 import { useDispatch , connect, useSelector} from 'react-redux';
+import { UPDATE_PROJECT_SAGA } from '../../constants/projectConstant';
 
  function FormEditProject(props) {
   const arrProjectCategory = useSelector(state=>state.projectCategoryReducer.arrProjectCategory);
@@ -19,10 +20,7 @@ import { useDispatch , connect, useSelector} from 'react-redux';
   } = props;
 
 
-    // const submitForm = (e) => {
-    //     e.preventDefault();
-    //     alert("submit edit")
-    // }
+ 
     useEffect(()=>{
       //gọi api category  
       dispatch({type:"GET_ALL_PROJECT_CATEGORY_SAGA"})
@@ -119,7 +117,7 @@ const editProjectForm = withFormik({
   handleSubmit: (values, {props, setSubmitting }) => {
   //user bấm submit => đưa dữ liệu về back end
     const action = {
-      type: "UPDATE_PROJECT_SAGA",
+      type: UPDATE_PROJECT_SAGA,
       projectUpdate: values
     }
      //call saga

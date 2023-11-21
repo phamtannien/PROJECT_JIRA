@@ -7,6 +7,7 @@ import CreateProject from '../pages/CreateProject/CreateProject'
 import ProjectManagement from '../pages/ProjectManagement/ProjectManagement'
 import FormCreateTask from '../components/Form/FormCreateTask'
 import UserRegister from '../layouts/HomeLayout/UserRegister'
+import UserManagement from '../pages/UserManagement/UserManagement'
 
 
 export default function Router() {
@@ -45,6 +46,11 @@ const routing = useRoutes([
         {
             path: "/createtask/:id",
             element: <FormCreateTask/>,
+            
+        },
+        {
+            path: "/usermanagement",
+            element: <UserManagement/>,
             
         },
         

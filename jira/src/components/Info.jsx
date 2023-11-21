@@ -285,21 +285,7 @@ export default function Info(props) {
                       value={taskDetailModal.statusId}
                       onChange={(e) => {
                         handleChange(e);
-                        // const action = {
-                        //   type: UPDATE_STATUS_TASK_SAGA,
-                        //   taskUpdateStatus: {
-                        //     taskId: taskDetailModal.taskId,
-                        //     statusId: e.target.value,
-                        //     projectId: taskDetailModal.projectId
-                        //   },
-
-                        // };
-
-                        // // console.log("taskUpdateStatus", {
-                        // //   taskId: taskDetailModal.taskId,
-                        // //     statusId: e.target.value
-                        // // });
-                        // dispatch(action);
+               
                       }}
                     >
                       {arrStatus.map((status, idx) => {
@@ -336,10 +322,6 @@ export default function Info(props) {
                                     userId: user.id
                                   })
 
-                                  // dispatch({
-                                  //   type: REMOVE_USER_ASIGNESS,
-                                  //   userId: user.id
-                                  // })
                                 }}
                               />
                             </p>
@@ -377,11 +359,7 @@ export default function Info(props) {
                             actionType: CHANGE_ASSIGNESS,
                             userSelected
                           })
-                          
-                          // dispatch({
-                          //   type: CHANGE_ASSIGNESS,
-                          //   userSelected
-                          // })
+                       
                         }}>
                          
                          

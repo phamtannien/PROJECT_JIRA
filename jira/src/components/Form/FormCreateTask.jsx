@@ -4,13 +4,13 @@ import { Radio, Select, Space,Slider  } from 'antd';
 import { useDispatch, useSelector, connect } from 'react-redux';
 import {withFormik, Form} from "formik";
 import * as Yup from 'yup';
-// const options = [];
-// for (let i = 10; i < 36; i++) {
-//   options.push({
-//     value: i.toString(36) + i,
-//     label: i.toString(36) + i,
-//   });
-// }
+import { GET_ALL_PROJECT_SAGA } from '../../constants/projectConstant';
+import { GET_ALL_TASK_TYPE_SAGA } from '../../constants/taskTypeConstant';
+import { GET_ALL_PRIORITY_SAGA } from '../../constants/priorityConstant';
+import { GET_ALL_STATUS_SAGA } from '../../constants/statusContant';
+import { SET_SUBMIT_CREATE_TASK } from '../../constants/modalConstant';
+import { GET_USER_API } from '../../constants/userConstants';
+
 
  function FormCreateTask(props) {
     //lấy dữ liệu từ redux
@@ -39,23 +39,23 @@ import * as Yup from 'yup';
     useEffect(()=>{
         
         dispatch({
-            type:"GET_ALL_PROJECT_SAGA"
+            type:GET_ALL_PROJECT_SAGA
         })
         dispatch({
-            type:"GET_ALL_TASK_TYPE_SAGA"
+            type:GET_ALL_TASK_TYPE_SAGA
         })
         dispatch({
-            type:"GET_ALL_PRIORITY_SAGA"
+            type:GET_ALL_PRIORITY_SAGA
         })
         dispatch({
-            type:"GET_ALL_STATUS_SAGA"
+            type:GET_ALL_STATUS_SAGA
         })
         dispatch({
-            type:"SET_SUBMIT_CREATE_TASK",
+            type:SET_SUBMIT_CREATE_TASK,
             submitFunction: handleSubmit
         })
        
-        dispatch({type: "GET_USER_API", keyWord: ""})
+        dispatch({type: GET_USER_API, keyWord: ""})
     },[])
 
 
@@ -197,8 +197,6 @@ import * as Yup from 'yup';
             <p>Description</p>
             <Editor
             name='description123'
-            // initialValue={values.description}
-            // value={values.description}
             init={{
               height: 500,
               menubar: false,
@@ -252,8 +250,6 @@ const formCreateTask = withFormik({
   },
   
     validationSchema: Yup.object().shape({
-       // email: Yup.string().required("Email is not required").email("email is invalid!"),
-        //password: Yup.string().min(6, "password must have min 6 characters").max(32,"password must have max 32 characters" )
     }) ,
   
     handleSubmit: (values, {props, setSubmitting }) => {

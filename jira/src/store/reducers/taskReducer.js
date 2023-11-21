@@ -1,4 +1,4 @@
-import { CHANGE_ASSIGNESS, CHANGE_TASK_MODAL, REMOVE_USER_ASIGNESS } from "../../constants/taskConstant"
+import { CHANGE_ASSIGNESS, CHANGE_TASK_MODAL, GET_TASK_DETAIL, REMOVE_USER_ASIGNESS } from "../../constants/taskConstant"
 
 const initialState = {
   taskDetailModal: {
@@ -41,7 +41,7 @@ const initialState = {
 
 export const taskReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "GET_TASK_DETAIL":{
+    case GET_TASK_DETAIL:{
       return {...state, taskDetailModal: action.taskDetailModal}
     }
     case CHANGE_TASK_MODAL:{

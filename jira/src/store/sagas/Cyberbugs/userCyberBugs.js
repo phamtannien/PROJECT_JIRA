@@ -1,10 +1,11 @@
 import axios from "axios";
 import {call, delay, fork, take, takeEvery, takeLatest, put, select} from "redux-saga/effects"
-import { ADD_USER_PROJECT_API, GET_USER_API, GET_USER_BY_PROJECT_ID, GET_USER_BY_PROJECT_ID_SAGA, GET_USER_SEARCH, REMOVE_USER_PROJECT_API, USER_LOGIN_TYPE, USER_SIGNIN_API } from "../../../constants/userConstants";
+import { ADD_USER_PROJECT_API, DELETE_USER_API, GET_USER_API, GET_USER_BY_PROJECT_ID, GET_USER_BY_PROJECT_ID_SAGA, GET_USER_SEARCH, REMOVE_USER_PROJECT_API, USER_LOGIN_TYPE, USER_SIGNIN_API } from "../../../constants/userConstants";
 import { userService } from "../../../services/userService";
 import { notification } from "antd";
 import { STATUS_CODE, TOKEN, USER_LOGIN } from "../../../constants/api";
 import { GET_LIST_PROJECT_SAGA } from "../../../constants/projectConstant";
+import { DISPLAY_LOADING, HIDE_LOADING } from "../../../constants/loadingConstant";
 
 //quản lý các action saga
 
@@ -44,18 +45,54 @@ function* getUserSaga (action){
 
 
 //call api
+yield put({
+    type: DISPLAY_LOADING
+})
+yield delay(300)
 try {
     const {data, status} = yield call(()=>userService.getUser(action.keyWord))
-    yield put({
-        type: GET_USER_SEARCH,
-        lstUserSearch: data.content
-    })
+    if(status === STATUS_CODE.SUCCESS){
+        yield put({
+            type: GET_USER_SEARCH,
+            lstUserSearch: data.content
+        })
+    }
+    
 } catch (error) {
     console.log(error.response.data);
 }
+yield put ({
+    type: HIDE_LOADING
+})
 }
 export function* theoDoiGetUser(){
     yield takeLatest(GET_USER_API, getUserSaga)
+}
+
+
+//delete user
+function* deleteUserSaga (action){
+
+
+
+try {
+    const {data, status} = yield call(()=>userService.deleteUser(action.userId))
+    notification.success({
+        message: "Delete success"
+    })
+    yield put({
+        type: GET_USER_API,
+        keyWord: ''
+    })
+} catch (error) {
+    notification.warning({
+        message: `delete fail!!!  ${error.response.data.content}`
+    })
+    console.log(error.response.data);
+}
+}
+export function* theoDoiDeleteUser(){
+    yield takeLatest(DELETE_USER_API, deleteUserSaga)
 }
 
 //add user to project

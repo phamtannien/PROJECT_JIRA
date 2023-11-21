@@ -48,6 +48,24 @@ class UserService {
            })
           
     }
+    deleteUser(id){
+        return request ({
+            url: `/Users/deleteUser?id=${id}`,
+            method: "DELETE",
+            headers: {'Authorization': "Bearer " + localStorage.getItem(TOKEN)}
+        
+           })
+          
+    }
+    deleteUser(userUpdate){
+        return request ({
+            url: `/Users/editUser`,
+            method: "PUT",
+           data: userUpdate
+        
+           })
+          
+    }
     asignUserProject(userProject){
         return request ({
             url: `/Project/assignUserProject`,
